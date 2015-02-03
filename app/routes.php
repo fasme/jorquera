@@ -1,6 +1,6 @@
 <?php
 
-/*a
+/*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
@@ -29,18 +29,6 @@ Route::get('usuarios/update/{id}', 'UsuariosController@update');
 
 Route::post('usuarios/update/{id}', 'UsuariosController@update2');
 // edita los datos enviados por el formulario
-Route::get('usuarios/eliminar', 'UsuariosController@eliminar');
-
-
-
-// TARIFA
-Route::get('tarifas', array('uses' => 'TarifasController@show')); 
-Route::get('tarifas/insert', array('uses' => 'TarifasController@insert'));
-Route::post('tarifas/insert', array('uses' => 'TarifasController@insert2'));
-Route::get('tarifas/update/{id}', 'TarifasController@update');
-Route::post('tarifas/update/{id}', 'TarifasController@update2');
-Route::get('tarifas/eliminar', 'TarifasController@eliminar');
-
 
 
 
@@ -57,6 +45,72 @@ $user->delete();
 	});
 
 */
+Route::get('usuarios/eliminar', 'UsuariosController@eliminar');
 
 
 
+
+//Route::get('/', array('uses' => 'ClienteController@show'));
+
+// Clientes
+Route::get('cliente', array('uses' => 'ClienteController@show')); 
+// si en el navegador se ingresa a /usuarios se ejecutara el controlador show donde se mostraran todos los usuarios
+
+Route::get('cliente/insert', array('uses' => 'ClienteController@insert'));
+//ruta para añadir nuevo usuario, solo muestra es el formulario
+ 
+Route::post('cliente/insert', array('uses' => 'ClienteController@insert2'));
+// esta ruta es a la cual apunta el formulario donde se introduce la información del usuario
+// como podemos observar es para recibir peticiones POST
+
+Route::get('cliente/update/{id}', 'ClienteController@update');
+// vista del formulario editar
+
+Route::post('cliente/update/{id}', 'ClienteController@update2');
+// edita los datos enviados por el formulario
+
+
+Route::get('cliente/eliminar', 'ClienteController@eliminar');
+
+
+
+// Tarifas
+Route::get('tarifa', array('uses' => 'TarifaController@show')); 
+// si en el navegador se ingresa a /usuarios se ejecutara el controlador show donde se mostraran todos los usuarios
+
+Route::get('tarifa/insert', array('uses' => 'TarifaController@insert'));
+//ruta para añadir nuevo usuario, solo muestra es el formulario
+ 
+Route::post('tarifa/insert', array('uses' => 'TarifaController@insert2'));
+// esta ruta es a la cual apunta el formulario donde se introduce la información del usuario
+// como podemos observar es para recibir peticiones POST
+
+Route::get('tarifa/update/{id}', 'TarifaController@update');
+// vista del formulario editar
+
+Route::post('tarifa/update/{id}', 'TarifaController@update2');
+// edita los datos enviados por el formulario
+
+
+Route::get('tarifa/eliminar', 'TarifaController@eliminar');
+
+
+// TarifaDetalle
+Route::get('tarifadetalle', array('uses' => 'TarifadetalleController@show')); 
+// si en el navegador se ingresa a /usuarios se ejecutara el controlador show donde se mostraran todos los usuarios
+
+Route::get('tarifadetalle/insert', array('uses' => 'TarifadetalleController@insert'));
+//ruta para añadir nuevo usuario, solo muestra es el formulario
+ 
+Route::post('tarifadetalle/insert', array('uses' => 'TarifadetalleController@insert2'));
+// esta ruta es a la cual apunta el formulario donde se introduce la información del usuario
+// como podemos observar es para recibir peticiones POST
+
+Route::get('tarifadetalle/update/{id}', 'TarifadetalleController@update');
+// vista del formulario editar
+
+Route::post('tarifadetalle/update/{id}', 'TarifadetalleController@update2');
+// edita los datos enviados por el formulario
+
+
+Route::get('tarifadetalle/eliminar', 'TarifadetalleController@eliminar');

@@ -31,10 +31,10 @@
        <?php
   // si existe el usuario carga los datos
     if ($usuario->exists):
-        $form_data = array('url' => 'usuarios/editar/'.$usuario->id);
+        $form_data = array('url' => 'usuarios/update/'.$usuario->id);
         $action    = 'Editar';
     else:
-        $form_data = array('url' => 'usuarios/crear');
+        $form_data = array('url' => 'usuarios/insert');
         $action    = 'Crear';        
     endif;
 

@@ -420,14 +420,14 @@
 
 						<ul class="submenu">
 							<li>
-								<a href={{ URL::to('proyectos/nuevo') }}>
+								<a href={{ URL::to('cliente/insert') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ingresar
 								</a>
 							</li>
 
 							<li>
-								<a href={{ URL::to('proyectos') }}>
+								<a href={{ URL::to('cliente') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ver/Editar
 								</a>
@@ -544,14 +544,15 @@
 
 										<ul class="submenu">
 											<li>
-												<a href="#">
+												<a href={{ URL::to('tarifa/insert') }}>
 													<i class="fa fa-angle-double-right"></i>
 													Ingresar
 												</a>
 											</li>
 
 											<li>
-												<a href="#">
+											
+												<a href={{ URL::to('tarifa') }}>
 													<i class="fa fa-angle-double-right"></i>
 													Ver/Editar
 												</a>
@@ -571,14 +572,57 @@
 
 										<ul class="submenu">
 											<li>
-												<a href="#">
+												<a href={{ URL::to('tarifadetalle/insert') }}>
 													<i class="fa fa-angle-double-right"></i>
 													Ingresar
 												</a>
 											</li>
 
 											<li>
-												<a href="#">
+												<a href={{ URL::to('tarifadetalle') }}>
+													<i class="fa fa-angle-double-right"></i>
+													Ver/Editar
+												</a>
+											</li>
+										</ul>
+									</li>
+
+				</ul><!--/.nav-list-->
+			</li>
+
+
+
+
+			<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="fa fa-adn"></i>
+
+									Bodega
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<ul class="submenu">
+									
+
+									<li>
+										<a href="#" class="dropdown-toggle">
+											<i class="icon-pencil"></i>
+
+											Producto
+											<b class="arrow fa fa-angle-down"></b>
+										</a>
+
+										<ul class="submenu">
+											<li>
+												<a href={{ URL::to('producto/insert') }}>
+													<i class="fa fa-angle-double-right"></i>
+													Ingresar
+												</a>
+											</li>
+
+											<li>
+											
+												<a href={{ URL::to('producto') }}>
 													<i class="fa fa-angle-double-right"></i>
 													Ver/Editar
 												</a>
@@ -587,17 +631,36 @@
 									</li>
 
 
-					
 
+									<li>
+										<a href="#" class="dropdown-toggle">
+											<i class="icon-pencil"></i>
 
+											Entrada/Salida
+											<b class="arrow fa fa-angle-down"></b>
+										</a>
 
-					
+										<ul class="submenu">
+											<li>
+												<a href={{ URL::to('transaccion/insert') }}>
+													<i class="fa fa-angle-double-right"></i>
+													Ingresar
+												</a>
+											</li>
 
-
-
-
+											<li>
+												<a href={{ URL::to('transaccion') }}>
+													<i class="fa fa-angle-double-right"></i>
+													Ver/Editar
+												</a>
+											</li>
+										</ul>
+									</li>
 
 				</ul><!--/.nav-list-->
+			</li>
+
+
 
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="fa fa-double-angle-left"></i>
