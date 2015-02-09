@@ -84,8 +84,9 @@
 
  $(document).ready(function() {
 
+$( "#clienteactive" ).addClass( "active" );
 
-$('#example').DataTable( {
+var table = $('#example').DataTable( {
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"

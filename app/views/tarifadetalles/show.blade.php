@@ -99,7 +99,12 @@
  $(document).ready(function() {
 
 
-$('#example').DataTable( {
+$( "#configuracionactive" ).addClass( "active" );
+
+$( "#tarifadetalleactive" ).addClass( "active" );
+
+
+var table = $('#example').DataTable( {
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"
@@ -134,9 +139,8 @@ var tr = $(this).parents('tr');
 
 
 
-        
 
-        
+ 
 
 
 @stop

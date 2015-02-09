@@ -77,4 +77,27 @@
     </div>
   @endif
 
+
+
+
+
+  <script type="text/javascript">
+
+
+ $(document).ready(function() {
+
+$( "#configuracionactive" ).addClass( "active" );
+
+$( "#tarifadetalleactive" ).addClass( "active" );
+
+
+
+
+
+
+});
+ </script>
+
+
+
 @stop

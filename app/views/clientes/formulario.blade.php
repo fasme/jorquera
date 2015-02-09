@@ -79,4 +79,37 @@
     </div>
   @endif
 
+
+
+
+
+
+
+
+  <script type="text/javascript">
+
+ $(document).ready(function() {
+
+
+$( "#clienteactive" ).addClass( "active" );
+
+
+
+
+
+});
+
+
+ </script>
+
+
+
+
 @stop
+
+
+
+
+
+
+

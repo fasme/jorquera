@@ -75,9 +75,10 @@ return Redirect::to('cliente/insert')->withInput()->withErrors($cliente->errors)
       
  
            $cliente = Cliente::find($id);
+           $tarifas = Tarifa::all()->lists("nombre","id");
    
-        return View::make('clientes.formulario')->with("cliente", $cliente);
- 
+        return View::make('clientes.formulario')->with("cliente", $cliente)->with("tarifas",$tarifas);
+
                 
  
       

@@ -87,8 +87,12 @@
 
  $(document).ready(function() {
 
+$( "#configuracionactive" ).addClass( "active" );
 
-$('#example').DataTable( {
+$( "#tarifaactive" ).addClass( "active" );
+
+
+var table =  $('#example').DataTable( {
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"

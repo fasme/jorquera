@@ -380,7 +380,7 @@
 						</a>
 					</li>
 
-					<li class="active">
+					<li id="usuarioactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-user"></i>
 							<span class="menu-text"> Usuarios </span>
@@ -410,7 +410,7 @@
 
 					</li>
 
-					<li>
+					<li id="clienteactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-male"></i>
 							<span class="menu-text"> Clientes </span>
@@ -439,7 +439,7 @@
 					</li>
 
 				
-					<li>
+					<li id="consumoactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-legal"></i>
 							<span class="menu-text"> Consumo </span>
@@ -449,14 +449,14 @@
 
 						<ul class="submenu">
 							<li>
-								<a href={{ URL::to('obras/nuevo') }}>
+								<a href={{ URL::to('consumo/nuevo') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ingresar
 								</a>
 							</li>
 
 							<li>
-								<a href={{ URL::to('obras') }}>
+								<a href={{ URL::to('consumo') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ver/Editar
 								</a>
@@ -468,7 +468,7 @@
 
 
 
-					<li>
+					<li id="boletaactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-list"></i>
 							<span class="menu-text"> Boleta </span>
@@ -478,14 +478,14 @@
 
 						<ul class="submenu">
 							<li>
-								<a href={{ URL::to('partidas/nuevo') }}>
+								<a href={{ URL::to('boleta/nuevo') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ingresar
 								</a>
 							</li>
 
 							<li>
-								<a href={{ URL::to('partidas') }}>
+								<a href={{ URL::to('boleta') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ver/Editar
 								</a>
@@ -496,7 +496,7 @@
 					</li>
 
 
-					<li>
+					<li id="cajachicaactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-usd"></i>
 					<span class="menu-text"> Caja Chica</span>
@@ -523,7 +523,7 @@
 						</ul>
 					</li>
 
-					<li>
+					<li id="configuracionactive">
 								<a href="#" class="dropdown-toggle">
 									<i class="fa fa-adn"></i>
 
@@ -534,7 +534,7 @@
 								<ul class="submenu">
 									
 
-									<li>
+									<li id="tarifaactive">
 										<a href="#" class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
@@ -562,7 +562,7 @@
 
 
 
-									<li>
+									<li id="tarifadetalleactive">
 										<a href="#" class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
@@ -593,7 +593,7 @@
 
 
 
-			<li>
+			<li id="bodegaactive">
 								<a href="#" class="dropdown-toggle">
 									<i class="fa fa-adn"></i>
 
@@ -604,7 +604,7 @@
 								<ul class="submenu">
 									
 
-									<li>
+									<li id="productoactive">
 										<a href="#" class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
@@ -632,7 +632,7 @@
 
 
 
-									<li>
+									<li id="entradasalidaactive">
 										<a href="#" class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
