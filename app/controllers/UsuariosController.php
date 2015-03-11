@@ -36,15 +36,19 @@ class UsuariosController extends BaseController {
         $usuario = new Usuario;
 
         $datos = Input::all(); 
+       // print_r($datos);
         
         if ($usuario->isValid($datos))
         {
             // Si la data es valida se la asignamos al usuario
             $usuario->fill($datos);
-            // Guardamos el usuario
-             $usuario->password = Hash::make($usuario->password);
 
-      
+            print_r($usuario);
+
+            // Guardamos el usuario
+         
+
+        
             
            $usuario->save();
 
@@ -128,6 +132,38 @@ return Redirect::to('usuarios/insert')->withInput()->withErrors($usuario->errors
     //return Redirect::to('usuarios/insert');
     }
 
+
+ public function postLogin(){
+
+    if (Auth::attempt(['username' => Input::get('usuario'), 'password' => Input::get('password') ])){
+       
+         if(Auth::user()->tipousuario == 1)
+         {
+            return Redirect::to('/');
+         }
+         elseif(Auth::user()->tipousuario == 2)
+         {
+            return Redirect::to('/');
+         }
+         if(Auth::user()->tipousuario == 3)
+         {
+            return Redirect::to('consumoTablet');
+         }
+        //
+    }else{
+        
+        return Redirect::to('login')->with('mensaje_login', 'Ingreso invalido')->withInput();
+    }
+    
+    }
+
+
+    public function logOut(){
+
+        Auth::logout();
+        
+        return Redirect::to('login')->with('mensaje_login', 'Tu sesión ha sido cerrada.');
+    }
 
 
  

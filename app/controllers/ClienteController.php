@@ -39,7 +39,7 @@ class ClienteController extends BaseController {
 
         $datos = Input::all(); 
         
-        if ($cliente->isValid($datos))
+        if ($cliente->isValid($datos,""))
         {
             // Si la data es valida se la asignamos al usuario
             $cliente->fill($datos);
@@ -51,7 +51,7 @@ class ClienteController extends BaseController {
            $cliente->save();
 
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
-            return Redirect::action('ClienteController@show');
+            return Redirect::to('cliente')->with("success","Datos ingresados correctamente");
             
         }
         else
@@ -93,7 +93,7 @@ return Redirect::to('cliente/insert')->withInput()->withErrors($cliente->errors)
 
         $datos = Input::all(); 
         
-        if ($cliente->isValid($datos))
+        if ($cliente->isValid($datos, $id))
         {
             // Si la data es valida se la asignamos al usuario
             $cliente->fill($datos);
@@ -105,7 +105,7 @@ return Redirect::to('cliente/insert')->withInput()->withErrors($cliente->errors)
            $cliente->save();
 
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
-            return Redirect::action('ClienteController@show');
+             return Redirect::to('cliente')->with("success","Datos ingresados correctamente");
             
         }
         else

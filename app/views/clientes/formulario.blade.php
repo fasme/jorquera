@@ -27,6 +27,21 @@
 <div class="page-header position-relative">
       <h1>Editar Cliente</h1>
   </div>
+
+
+                @if ($errors->any())
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Por favor corrige los siguentes errores:</strong>
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+  @endif
+
+  
             <!--si el formulario contiene errores de validación-->
        <?php
   // si existe el usuario carga los datos
@@ -60,6 +75,8 @@
             {{Form::text('direccion', $cliente->direccion)}}
             {{Form::label('telefono', 'Telefono')}}
             {{Form::text('telefono', $cliente->telefono)}}
+            {{Form::label('Orden')}}
+            {{Form::text('orden', $cliente->orden)}}
             {{Form::submit('Guardar')}}
         {{ Form::close() }}
 
@@ -67,17 +84,7 @@
 
 
 
-               @if ($errors->any())
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>Por favor corrige los siguentes errores:</strong>
-      <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-      </ul>
-    </div>
-  @endif
+ 
 
 
 

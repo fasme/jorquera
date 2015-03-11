@@ -46,6 +46,7 @@
 
 
 
+
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
@@ -54,7 +55,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
 	<body>
-		<div class="navbar">
+		<div class="navbar" id="navbar0">
 			<div class="navbar-inner">
 				
 				<div class="container-fluid">
@@ -300,7 +301,9 @@
 								<img class="nav-user-photo" src={{ URL::to('avatars/avatar2.png') }} alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
-									Usuario
+									{{ Auth::user()->nombre   }}
+									{{ Auth::user()->apellido   }}
+
 								</span>
 
 								<i class="fa fa-caret-down"></i>
@@ -324,7 +327,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href={{url("logout")}}>
 										<i class="fa fa-logout"></i>
 										Logout
 									</a>
@@ -336,7 +339,7 @@
 			</div><!--/.navbar-inner-->
 		</div>
 
-		<div class="main-container container-fluid">
+		<div class="main-container container-fluid" id="menumenu">
 			<a class="menu-toggler" id="menu-toggler" href="#">
 				<span class="menu-text"></span>
 			</a>
@@ -345,7 +348,7 @@
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						<button class="btn btn-small btn-success">
-							<i class="fa fa-signal"></i>
+							<i class="fa fa-tablet"></i>
 						</button>
 
 						<button class="btn btn-small btn-info">
@@ -379,7 +382,7 @@
 							<span class="menu-text"> Dashboard </span>
 						</a>
 					</li>
-
+<!--
 					<li id="usuarioactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-user"></i>
@@ -410,6 +413,19 @@
 
 					</li>
 
+				-->
+
+
+				<li id="usuarioactive">
+						<a href={{url("usuarios")}} class="dropdown-toggle">
+							<i class="fa fa-user"></i>
+							<span class="menu-text"> Usuarios </span>
+						
+						</a>
+
+
+					</li>
+<!--
 					<li id="clienteactive">
 						<a href="#" class="dropdown-toggle">
 							<i class="fa fa-male"></i>
@@ -432,12 +448,19 @@
 									Ver/Editar
 								</a>
 							</li>
+-->
 
+<li id="clienteactive">
+						<a href={{ url("cliente")}} class="dropdown-toggle">
+							<i class="fa fa-male"></i>
+							<span class="menu-text"> Clientes </span>
 
 							
-						</ul>
-					</li>
+						</a>
 
+
+					</li>
+<!--
 				
 					<li id="consumoactive">
 						<a href="#" class="dropdown-toggle">
@@ -449,7 +472,7 @@
 
 						<ul class="submenu">
 							<li>
-								<a href={{ URL::to('consumo/nuevo') }}>
+								<a href={{ URL::to('consumo/insert0') }}>
 									<i class="fa fa-angle-double-right"></i>
 									Ingresar
 								</a>
@@ -465,35 +488,32 @@
 							
 						</ul>
 					</li>
+-->
 
+					<li id="consumoactive">
+						<a href={{ url("consumo")}} class="dropdown-toggle">
+							<i class="fa fa-legal"></i>
+							<span class="menu-text"> Consumo </span>
 
+							
+						</a>
 
+					
+					</li>
+
+					<!--
 					<li id="boletaactive">
-						<a href="#" class="dropdown-toggle">
+						<a href={{url("boleta")}} class="dropdown-toggle">
 							<i class="fa fa-list"></i>
 							<span class="menu-text"> Boleta </span>
 
-							<b class="arrow fa fa-angle-down"></b>
+							
 						</a>
 
-						<ul class="submenu">
-							<li>
-								<a href={{ URL::to('boleta/nuevo') }}>
-									<i class="fa fa-angle-double-right"></i>
-									Ingresar
-								</a>
-							</li>
-
-							<li>
-								<a href={{ URL::to('boleta') }}>
-									<i class="fa fa-angle-double-right"></i>
-									Ver/Editar
-								</a>
-							</li>
-
-							
-						</ul>
+						
 					</li>
+
+				-->
 
 
 					<li id="cajachicaactive">
@@ -605,56 +625,27 @@
 									
 
 									<li id="productoactive">
-										<a href="#" class="dropdown-toggle">
+										<a href={{URL::to("producto")}} class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
 											Producto
-											<b class="arrow fa fa-angle-down"></b>
+											
 										</a>
 
-										<ul class="submenu">
-											<li>
-												<a href={{ URL::to('producto/insert') }}>
-													<i class="fa fa-angle-double-right"></i>
-													Ingresar
-												</a>
-											</li>
-
-											<li>
-											
-												<a href={{ URL::to('producto') }}>
-													<i class="fa fa-angle-double-right"></i>
-													Ver/Editar
-												</a>
-											</li>
-										</ul>
+										
 									</li>
 
 
 
 									<li id="entradasalidaactive">
-										<a href="#" class="dropdown-toggle">
+										<a href={{URL::to("transaccion")}} class="dropdown-toggle">
 											<i class="icon-pencil"></i>
 
 											Entrada/Salida
 											<b class="arrow fa fa-angle-down"></b>
 										</a>
 
-										<ul class="submenu">
-											<li>
-												<a href={{ URL::to('transaccion/insert') }}>
-													<i class="fa fa-angle-double-right"></i>
-													Ingresar
-												</a>
-											</li>
-
-											<li>
-												<a href={{ URL::to('transaccion') }}>
-													<i class="fa fa-angle-double-right"></i>
-													Ver/Editar
-												</a>
-											</li>
-										</ul>
+										
 									</li>
 
 				</ul><!--/.nav-list-->
@@ -745,7 +736,6 @@
 
 		
 
-	 
 
 		<!--page specific plugin scripts-->
 

@@ -6,6 +6,10 @@ class Tarifa extends Eloquent { //Todos los modelos deben extender la clase Eloq
 
 
 
+public function cliente(){
+    return $this->hasMany ("Cliente");
+   }
+
     public $errors;
     
     public function isValid($data) // funcion que valida los datos

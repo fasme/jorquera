@@ -2,13 +2,20 @@
 class Cliente extends Eloquent { //Todos los modelos deben extender la clase Eloquent
     protected $table = 'cliente';
    
-   protected $fillable = array('tarifa_id','nombres','apellidop','apellidom','rut','origen','nmedidor','direccion','telefono'); // los campos de la tabla
+   protected $fillable = array('tarifa_id','nombres','apellidop','apellidom','rut','origen','nmedidor','direccion','telefono','orden'); // los campos de la tabla
 
+   public function consumo(){
+    return $this->hasMany("Consumo");
+   }
 
+   public function tarifa()
+   {
+    return $this->belongsTo("Tarifa");
+   }
 
     public $errors;
     
-    public function isValid($data) // funcion que valida los datos
+    public function isValid($data, $id) // funcion que valida los datos
     {
         $rules = array(
             'tarifa_id' => 'required',
@@ -20,6 +27,7 @@ class Cliente extends Eloquent { //Todos los modelos deben extender la clase Elo
             'nmedidor' => 'required',
             'direccion'     => 'required',
             'telefono' => 'required',
+            'orden' => 'required|unique:cliente,orden,'.$id,
         );
         
         $validator = Validator::make($data, $rules);

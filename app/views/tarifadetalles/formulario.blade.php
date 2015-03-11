@@ -27,6 +27,23 @@
 <div class="page-header position-relative">
       <h1>Editar Detalle</h1>
   </div>
+
+ 
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Por favor corrige los siguentes errores:</strong>
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+  @endif
+
+
+
             <!--si el formulario contiene errores de validación-->
        <?php
   // si existe el usuario carga los datos
@@ -46,7 +63,7 @@
         
             
             {{Form::label('tarifa', 'Tarifa')}}
-            {{Form::select('tari',$tari,$tarifadetalle->tarifa_id)}}
+            {{Form::select('tarifa_id',$tari,$tarifadetalle->tarifa_id)}}
 
 
              {{Form::label('tramoa', 'Tramo A (mt 3)')}}
@@ -65,17 +82,6 @@
 
 
 
-               @if ($errors->any())
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>Por favor corrige los siguentes errores:</strong>
-      <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-      </ul>
-    </div>
-  @endif
 
 
 

@@ -55,7 +55,7 @@
               @endif 
 
             {{Form::label("Tipo de usuario")}}
-            {{Form::select("tipousuario",array("1"=>"Administrador","2"=>"Usuario"),$usuario->tipousuario)}}
+            {{Form::select("tipousuario",array("1"=>"Administrador","2"=>"Usuario","3"=>"Operador"),$usuario->tipousuario)}}
             {{Form::submit('Guardar')}}
         {{ Form::close() }}
 

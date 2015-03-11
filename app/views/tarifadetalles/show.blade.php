@@ -36,6 +36,14 @@
 </h1>
  </div><!--/.page-header-->
    
+<div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong></strong>
+  @if(Session::get('success'))
+  {{Session::get('success')}}
+  @endif
+</div>
+
  
 <table id="example" class="table table-striped table-bordered table-hover">
   <thead>
@@ -50,24 +58,25 @@
           </tr>
         </thead>
         <tbody>
+       
   @foreach($tarifadetalle as $tarifadetalles)
            <tr>
 <td>
-    {{ $tarifadetalle->tarifa_id}}
+    {{ $tarifadetalles->tarifa->nombre}}
       
   </td>
            <td>
-    {{ $tarifadetalle->tramoa}}
-      
-  </td>
-
-           <td>
-    {{ $tarifadetalle->tramob}}
+    {{ $tarifadetalles->tramoa}}
       
   </td>
 
            <td>
-    {{ $tarifadetalle->valor}}
+    {{ $tarifadetalles->tramob}}
+      
+  </td>
+
+           <td>
+    {{ $tarifadetalles->valor}}
       
   </td>
   
@@ -77,11 +86,11 @@
                         
 
 
-                          <a class="green" href= {{ 'tarifa/update/'.$tarifadetalle->id }}>
+                          <a class="green" href= {{ 'tarifadetalle/update/'.$tarifadetalles->id }}>
                             <i class="fa fa-pencil bigger-130"></i>
                           </a>
 
-                          <a class="red bootbox-confirm" data-id={{ $tarifadetalle->id }}>
+                          <a class="red bootbox-confirm" data-id={{ $tarifadetalles->id }}>
                             <i class="fa fa-trash bigger-130"></i>
                           </a>
                        

@@ -53,9 +53,10 @@ class Tarifadetallecontroller extends BaseController {
       
             
            $tarifadetalle->save();
-
+           $mensaje = "Datos guardados correctamente";
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
-            return Redirect::action('tarifadetalleController@show');
+            return Redirect::to('tarifadetalle')->with("success","Datos guardados correctamente");
+         
             
         }
         else
@@ -79,8 +80,9 @@ return Redirect::to('tarifadetalle/insert')->withInput()->withErrors($tarifadeta
       
  
            $tarifadetalle = Tarifadetalle::find($id);
+            $tari = tarifa::lists('nombre','id');
    
-        return View::make('tarifadetalles.formulario')->with("tarifadetalle", $tarifadetalle);
+        return View::make('tarifadetalles.formulario')->with("tarifadetalle", $tarifadetalle)->with("tari",$tari);
  
                 
  
@@ -108,7 +110,7 @@ return Redirect::to('tarifadetalle/insert')->withInput()->withErrors($tarifadeta
            $tarifadetalle->save();
 
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
-            return Redirect::action('arifadetalleController@show');
+            return Redirect::to('tarifadetalle')->with("success","Datos editados correctamente");;
             
         }
         else

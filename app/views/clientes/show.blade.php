@@ -32,11 +32,27 @@
  <div class="page-header position-relative">
         <h1>
  Clientes
+<a class="btn  btn-success" href={{ url("cliente/insert")}}>
+  <i class="fa fa-plus-circle fa-2x pull-left"></i> Añadir</a> 
 
 </h1>
  </div><!--/.page-header-->
-   
+
+
+ @if(Session::get('success'))
+<div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong></strong>
  
+  {{Session::get('success')}}
+
+</div>
+@endif
+
+
+
+
+
 <table id="example" class="table table-striped table-bordered table-hover">
   <thead>
           <tr>
@@ -87,9 +103,11 @@
 $( "#clienteactive" ).addClass( "active" );
 
 var table = $('#example').DataTable( {
+        iDisplayLength: -1,
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"
+            
         }
     } );
 

@@ -5,6 +5,10 @@ class Tarifadetalle extends Eloquent { //Todos los modelos deben extender la cla
    protected $fillable = array('id','tarifa_id','tramoa','tramob','valor'); // los campos de la tabla
 
 
+   public function tarifa(){
+
+    return $this->belongsTo("Tarifa");
+   }
 
     public $errors;
     

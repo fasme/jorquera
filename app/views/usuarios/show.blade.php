@@ -33,7 +33,8 @@
  <div class="page-header position-relative">
         <h1>
   Usuarios
-
+<a class="btn  btn-success" href={{ url("usuarios/insert")}}>
+  <i class="fa fa-plus-circle fa-2x pull-left"></i> Añadir</a> 
 </h1>
  </div><!--/.page-header-->
    
@@ -94,6 +95,7 @@
 
 
 $('#example').DataTable( {
+  iDisplayLength: -1,
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"
@@ -109,7 +111,7 @@ var tr = $(this).parents('tr');
             if(result) {
              // bootbox.alert("You are sure!");
              tr.fadeOut(1000);
-             $.get("{{ url('eliminar')}}",
+             $.get("{{ url('usuarios/eliminar')}}",
               { id: id },
     
       function(data) {
