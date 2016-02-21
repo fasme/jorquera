@@ -65,6 +65,9 @@
   {{ "Usuario" }}
   @endif
 
+@if ($usuario->tipousuario == "3")
+  {{ "Operador" }}
+  @endif
     </td>
 
   <td class="td-actions">

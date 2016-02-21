@@ -2,7 +2,7 @@
 class Tarifadetalle extends Eloquent { //Todos los modelos deben extender la clase Eloquent
     protected $table = 'tarifadetalle';
    
-   protected $fillable = array('id','tarifa_id','tramoa','tramob','valor'); // los campos de la tabla
+   protected $fillable = array('id','tarifa_id','tramoa','tramob','valor','sobreconsumo'); // los campos de la tabla
 
 
    public function tarifa(){

@@ -11,16 +11,15 @@
 |
 */
 Route::get('login', function(){
-    return View::make('login.login');
+
+	
+	return View::make('login.login');
 });
 
 Route::post('login', array('uses' => 'UsuariosController@postLogin'));
 Route::get('logout', 'UsuariosController@logOut');
 
 
-
-Route::group(array('before' => 'auth'), function()
-{
 
 
 // USUARIOS
@@ -31,6 +30,12 @@ Route::post('usuarios/insert', array('uses' => 'UsuariosController@insert2'));
 Route::get('usuarios/update/{id}', 'UsuariosController@update');
 Route::post('usuarios/update/{id}', 'UsuariosController@update2');
 Route::get("usuarios/eliminar", "UsuariosController@eliminar");
+
+Route::group(array('before' => 'auth'), function()
+{
+
+
+
 
 
 
@@ -56,6 +61,15 @@ Route::get('producto/update/{id}', 'ProductoController@update');
 Route::post('producto/update/{id}', 'ProductoController@update2');
 Route::get('producto/eliminar', 'ProductoController@eliminar');
 
+
+// CAJA CHICA
+
+Route::get('cajachica', array('uses' => 'CajachicaController@show')); 
+Route::get('cajachica/insert', array('uses' => 'CajachicaController@insert'));
+Route::post('cajachica/insert', array('uses' => 'CajachicaController@insert2'));
+Route::get('cajachica/update/{id}', 'CajachicaController@update');
+Route::post('cajachica/update/{id}', 'CajachicaController@update2');
+Route::get('cajachica/eliminar', 'CajachicaController@eliminar');
 
 // TRANSACCION
 
@@ -98,12 +112,28 @@ Route::get('consumo/eliminar', 'ConsumoController@eliminar');
 Route::post('consumo/editable', 'ConsumoController@editable');
 Route::get('consumo/pdf/{id}', 'ConsumoController@pdf');
 Route::get('consumo/pagar/{id}', 'ConsumoController@pagar');
+Route::post('consumo/pagar/{id}', 'ConsumoController@pagar2');
+Route::get('consumo/pendientes/{cliente_id}', 'ConsumoController@pendientes');
+Route::get('consumo/corte/{cliente_id}', 'ConsumoController@corte');
+Route::get('consumo/reposicion/{cliente_id}', 'ConsumoController@reposicion');
+Route::get('consumo/cuotas/{cliente_id}', 'ConsumoController@cuotas');
+Route::post('consumo/cuotas/{cliente_id}', 'ConsumoController@cuotas2');
+
 
 
 //Consumo Tablet
 
 Route::get('consumoTablet', array('uses' => 'ConsumotabletController@show')); 
+Route::post('consumoTablet/insert', array('uses' => 'ConsumotabletController@insert2')); 
 
+// IMPORTAR y EXPORTAR 
+
+Route::get('importarTablet', array('uses' => 'ImportarController@importTablet')); 
+Route::post("importarTablet2", array("uses"=>"ImportarController@importTablet2"));
+Route::get('exportarTablet', array('uses' => 'ImportarController@exportTablet')); 
+Route::get('importar', array('uses' => 'ImportarController@import')); 
+Route::post("importar2", array("uses"=>"ImportarController@import2"));
+Route::get('exportar', array('uses' => 'ImportarController@export')); 
 
 // BOLETA
 Route::get('boleta', array('uses' => 'BoletaController@show')); 
@@ -113,5 +143,20 @@ Route::get('boleta/update/{id}', 'BoletaController@update');
 Route::post('boleta/update/{id}', 'BoletaController@update2');
 Route::get('boleta/eliminar', 'BoletaController@eliminar');
 Route::get('boleta/pdf/{id}', 'BoletaController@pdf');
+
+
+// COBRO EXTRA
+
+Route::get("cobroextra",array("uses"=>"CobroextraController@show"));
+Route::get('cobroextra/insert', array('uses' => 'CobroextraController@insert'));
+Route::post('cobroextra/insert', array('uses' => 'CobroextraController@insert2'));
+Route::get('cobroextra/update/{id}', 'CobroextraController@update');
+Route::post('cobroextra/update/{id}', 'CobroextraController@update2');
+Route::get('cobroextra/eliminar', 'CobroextraController@eliminar');
+
+// INFORME
+
+Route::get('informe/sinservicio', array('uses' => 'InformeController@sinServicio'));
+Route::get('informe/cuotas', array('uses' => 'InformeController@cuotas'));  
 
 }); // fin before auth

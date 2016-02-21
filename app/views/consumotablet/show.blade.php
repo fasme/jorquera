@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterTablet')
 
 @section('breadcrumb')
 <ul class="breadcrumb">
@@ -26,8 +26,8 @@
 @section('contenido')
 <div class="page-header position-relative">
       <h1>Consumo 
-        <a class="btn  btn-success" href={{ url("consumo/insert")}}>
-  <i class="fa fa-plus-circle fa-2x pull-left"></i> Añadir</a> 
+  <!--      <a class="btn  btn-success" href={{ url("consumo/insert")}}>
+  <i class="fa fa-plus-circle fa-2x pull-left"></i> Añadir</a>  -->
 
 </h1>
 
@@ -43,7 +43,7 @@ if (Input::has('mes'))
 }
 else
 {
-  $mes = date("m");
+  $mes = date("n");
 }
 
 if (Input::has('mes'))
@@ -60,10 +60,14 @@ else
 
 
 <?php
-$meses = array("1"=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+$meses = array("1"=>"Enero","2"=>"Febrero","3"=>"Marzo","4"=>"Abril","5"=>"Mayo","6"=>"Junio","7"=>"Julio","8"=>"Agosto","9"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre");
 $anos = array("2015"=>"2015","2016","2017","2018","2019","2020");
+
+$meses2 = array("",'enero','febrero','marzo','abril','mayo','junio','julio',
+               'agosto','septiembre','octubre','noviembre','diciembre');
 ?>
 
+<!--
             {{ Form::open(array('url' => 'consumo', "method"=>"get")) }}
         
             
@@ -75,61 +79,136 @@ $anos = array("2015"=>"2015","2016","2017","2018","2019","2020");
            
             {{Form::submit('Enviar')}}
         {{ Form::close() }}
+-->
+
+
+<?php 
+$lecturaanterior ="";
+$consumito = "";
+$consumito2 = "";
+$consumito3 = "";
+$lecturamespasado="";
+$lecturamesactual="";
+$estadomespasado = "";
+$estadomesactual ="";
+
+if($mes == 1)
+{
+  $mesanterior = 12;
+  $anoanterior = $ano-1;
+}
+else
+{
+  $mesanterior = $mes-1;
+  $anoanterior = $ano;
+}
+?>
 
 
 
 
-
- <table id="example" class="table table-striped table-bordered table-hover">
-  <thead>
-          <tr>
-          <th>Rut</th>
-            <th>Nombres</th>
-            <th>Orden</th>
-            <th>Consumo del mes seleccionado</th>
-           <th>Acciones</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-
-
-
+{{ Form::open(array('url' => 'consumoTablet/insert')) }}
 
   @foreach($clientes as $cliente)
-           <tr>
-<td>{{ $cliente->rut}}</td>
 
-<td>{{ $cliente->nombres." ".$cliente->apellidop.' '.$cliente->apellidom }}</td>
+{{ Form::hidden("mes", $mes)}}
+           {{ Form::hidden("ano", $ano)}}
+           {{Form::hidden('cliente_id', $cliente->id)}}
 
-<td> {{ $cliente->orden }} </td>
-  <?php $consumomes ="";
-  $consumoid = ""; ?>
-@foreach($cliente->consumo()->whereRaw("EXTRACT(month FROM fecha) =". $mes)->whereRaw("EXTRACT(year FROM fecha) =". $ano)->get() as $consumo)
-<?php $consumomes = $consumo->consumo; 
-$consumoid = $consumo->id; ?>
+<div class="widget-box pricing-box">
+                    <div class="widget-header header-color-orange">
+                      <h5 class="bigger lighter"> {{  $meses2[$mes] ." del ". $ano }}</h5>
+                    </div>
+
+                    <div class="widget-body">
+                      <div class="widget-main">
+                        <ul class="unstyled spaced2">
+                          <li>
+                            <i class="icon-ok green"></i>
+                            <strong>RUT:</strong> {{ $cliente->rut}}
+                          </li>
+
+                          <li>
+                            <i class="icon-ok green"></i>
+                           <strong>Nombre:</strong> {{ $cliente->nombres." ".$cliente->apellidop.' '.$cliente->apellidom }}
+                          </li>
+
+                          <li>
+                            <i class="icon-ok green"></i>
+                            <strong> Orden: </strong> {{ $cliente->orden }} 
+                          </li>
+
+                          <li>
+                            <i class="icon-ok green"></i>
+
+                            <strong>Lectura mes anterior: </strong>
+
+                            @foreach($cliente->consumo()->where("ano","=", $anoanterior)->where("mes","=",$mesanterior)->get() as $lecturaanterior)
+
+
+<?php
+
+ 
+  $consumito = Consumo::find($lecturaanterior->id);
+  echo $lecturamespasado = $consumito->lectura;
+  $estadomespasado = $consumito->estado;
+
+?>
 @endforeach
-<td>  {{ $consumomes }}  </td>
+                          </li>
+
+                          <li>
+                            <i class="icon-ok green"></i>
+                           
+
+                            <?php
+   $lecturaactual ="";
+  $consumoid = ""; ?>
+  
+ <strong>Lectura mes Actual: </strong>
+ {{ Form::text("lectura","")}}
+@foreach($cliente->consumo()->where("ano","=", $ano)->where("mes","=",$mes)->get() as $lecturaactual2)
+<?php 
+/*
+NO  MUESTRO LA LECTURA DEL MES ACTUAL, YA QUE SOLO SE MOSTRARAN LOS  CLIENTES QUE NO TENGAN CONSUMO
+$consumito2 = Consumo::find($lecturaactual2->id);
+$consumoid = $consumito2->id; 
 
 
+ echo $lecturamesactual = $consumito2->lectura;
+ $estadomesactual = $consumito2->estado;
+ */
+ ?>
 
-<td class="td-actions">                       
-                        
+@endforeach
 
-        @if(is_numeric($consumoid))
-                          <a class="green bootbox-dialog" href=<?php echo url('consumo/update',  array("id"=>$consumoid)); ?> >
-                            <i class="fa fa-pencil bigger-130"></i>
-                          </a>
-        @endif             
-                          
+
+                          </li>
+
+                          <li>
+                            <i class="icon-ok green"></i>
+          <strong>Consumo: </strong>                
+{{ $lecturamesactual - $lecturamespasado}}
+
+                          </li>
+                        </ul>
+
+                        <hr />
                        
-     
-                      </td>
-</tr>
-          @endforeach
-        </tbody>
-  </table>
+                      </div>
 
+                      <div>
+                        {{ Form::submit("Enviar", array("class"=>"btn btn-small btn-success"))}}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+           
+
+
+          @endforeach
+ 
+{{ $clientes->links() }}
 
 
                @if ($errors->any())
@@ -155,6 +234,8 @@ $consumoid = $consumo->id; ?>
 
  $(document).ready(function() {
 
+  $('[data-rel=tooltip]').tooltip();
+
 $( "#consumoactive" ).addClass( "active" );
 
 var table = $('#example').DataTable( {
@@ -164,9 +245,7 @@ var table = $('#example').DataTable( {
             "sSwfPath": "../js/TableTools/swf/copy_csv_xls_pdf.swf"
             
         }
-    } ).makeEditable({
-                    sUpdateURL: "editable.php"
-                });
+    } );
 
 
 

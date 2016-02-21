@@ -1,0 +1,4 @@
+1,1,Fabian,Munoz,M,16677488,quilpue,15465564,jose uribe,24912,1,
+2,1,Juan,Perez,Padilla,15636597-8,Salamanca,8555541,asd,487848,2,
+3,1,Nimer,Hammad,Gonzales,10.236.236,jorquera,1540,parcela 40,551245,5,
+4,1,Pedrito,a,k,1555564-8,sad,1500,jose,001215,4,

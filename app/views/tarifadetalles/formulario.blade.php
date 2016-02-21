@@ -74,6 +74,9 @@
 
              {{Form::label('valor', 'Valor del Tramo')}}
             {{Form::text('valor', $tarifadetalle->valor)}}
+
+            {{Form::label('sobreconsumo', 'Valor del sobreconsumo')}}
+            {{Form::text('sobreconsumo', $tarifadetalle->sobreconsumo)}}
            
             {{Form::submit('Guardar')}}
         {{ Form::close() }}

@@ -59,11 +59,11 @@
         
             
             {{Form::label('producto_id', 'Producto')}}
-            {{Form::text('producto_id', $transaccion->producto)}}
+            {{Form::select('producto_id',$productos, $transaccion->producto, array("id"=>"productos"))}}
             {{Form::label('tipotransaccion', 'tipotransaccion')}}
-            {{Form::text('tipotransaccion', $transaccion->tipotransaccion)}}
+            {{Form::select('tipotransaccion', array("entrada"=>"entrada","salida"=>"salida"), $transaccion->tipotransaccion)}}
 			{{Form::label('cantidad', 'cantidad')}}
-            {{Form::text('cantidad', $transaccion->catidad)}}
+            {{Form::text('cantidad', $transaccion->cantidad)}}
 			{{Form::label('valor', 'valor')}}
             {{Form::text('valor', $transaccion->valor)}}
             
@@ -88,9 +88,9 @@
  $(document).ready(function() {
 
 
-$( "#transaccionactive" ).addClass( "active" );
+$( "#bodegaactive" ).addClass( "active" );
 
-
+$("#productos").chosen(); 
 
 
 

@@ -60,8 +60,7 @@
             
             {{Form::label('nombre', 'Nombre')}}
             {{Form::text('nombre', $producto->nombre)}}
-            {{Form::label('stock', 'Stock')}}
-            {{Form::text('stock', $producto->stock)}}
+            
             
             {{Form::submit('Guardar')}}
         {{ Form::close() }}
@@ -84,7 +83,7 @@
  $(document).ready(function() {
 
 
-$( "#productoactive" ).addClass( "active" );
+$( "#bodegaactive" ).addClass( "active" );
 
 
 

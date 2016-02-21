@@ -5,6 +5,10 @@ class Producto extends Eloquent { //Todos los modelos deben extender la clase El
    protected $fillable = array('id','nombre','stock'); // los campos de la tabla
 
 
+ public function transaccion(){
+    return $this->hasMany("Transaccion");
+   }
+
 
     public $errors;
     
@@ -12,8 +16,7 @@ class Producto extends Eloquent { //Todos los modelos deben extender la clase El
     {
         $rules = array(
             
-            'nombre'     => 'required',
-            'stock' => 'required',
+            'nombre'     => 'required'
             
         );
         

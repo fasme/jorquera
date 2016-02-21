@@ -301,8 +301,10 @@
 								<img class="nav-user-photo" src={{ URL::to('avatars/avatar2.png') }} alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
+									@if(Auth::user())
 									{{ Auth::user()->nombre   }}
 									{{ Auth::user()->apellido   }}
+									@endif
 
 								</span>
 
@@ -515,32 +517,27 @@
 
 				-->
 
+				<li id="cobroextraactive">
+						<a href={{URL("cobroextra")}} class="dropdown-toggle">
+							<i class="fa fa-usd"></i>
+					<span class="menu-text"> Cobros Extras</span>
+
+							
+						</a>
+
+						
+					</li>
+
 
 					<li id="cajachicaactive">
-						<a href="#" class="dropdown-toggle">
+						<a href={{URL("cajachica")}} class="dropdown-toggle">
 							<i class="fa fa-usd"></i>
 					<span class="menu-text"> Caja Chica</span>
 
-							<b class="arrow fa fa-angle-down"></b>
+							
 						</a>
 
-						<ul class="submenu">
-							<li>
-								<a href="elements.html">
-									<i class="fa fa-angle-double-right"></i>
-									Ingresar
-								</a>
-							</li>
-
-							<li>
-								<a href="buttons.html">
-									<i class="fa fa-angle-double-right"></i>
-									Ver/Editar
-								</a>
-							</li>
-
-							
-						</ul>
+						
 					</li>
 
 					<li id="configuracionactive">
@@ -615,7 +612,7 @@
 
 			<li id="bodegaactive">
 								<a href="#" class="dropdown-toggle">
-									<i class="fa fa-adn"></i>
+									<i class="fa fa-cube"></i>
 
 									Bodega
 									<b class="arrow fa fa-angle-down"></b>
@@ -642,7 +639,7 @@
 											<i class="icon-pencil"></i>
 
 											Entrada/Salida
-											<b class="arrow fa fa-angle-down"></b>
+											
 										</a>
 
 										
@@ -650,6 +647,71 @@
 
 				</ul><!--/.nav-list-->
 			</li>
+
+
+
+
+<li id="informeactive">
+								<a href="#" class="dropdown-toggle">
+									<i class="fa fa-bar-chart"></i>
+
+									Informes
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<ul class="submenu">
+									
+
+									<li id="informeactive">
+										<a href={{URL::to("informe/sinservicio")}} class="dropdown-toggle">
+											<i class="icon-pencil"></i>
+
+											Clientes sin servicio
+											
+										</a>
+
+										
+									</li>
+<!--
+
+									<li id="cuotasactive">
+										<a href={{URL::to("informe/cuotas")}} class="dropdown-toggle">
+											<i class="icon-pencil"></i>
+
+											Cuotas
+											
+										</a>
+
+										
+									</li>
+
+-->
+
+				</ul><!--/.nav-list-->
+			</li>
+
+
+			<li id="importaractive">
+						<a href={{ url("importar")}} class="dropdown-toggle">
+							<i class="fa fa-upload"></i>
+							<span class="menu-text"> Importar </span>
+
+							
+						</a>
+
+					
+					</li>
+
+					<li id="exportaractive">
+						<a href={{ url("exportar")}} class="dropdown-toggle">
+							<i class="fa fa-file"></i>
+							<span class="menu-text"> Exportar </span>
+
+							
+						</a>
+
+					
+					</li>
 
 
 

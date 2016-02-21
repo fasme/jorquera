@@ -63,6 +63,17 @@ return array(
 			'prefix'    => '',
 		),
 
+		'BDHosting' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'consumo',
+			'username'  => 'root',
+			'password'  => 'jorquera2015',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',

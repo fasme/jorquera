@@ -12,20 +12,20 @@
             </li>
 
             <li>
-              <a href={{ URL::to('clientes') }}>Consumo</a>
+              <a href={{ URL::to('clientes') }}>Pago</a>
 
               <span class="divider">
                 <i class="icon-angle-right arrow-icon"></i>
               </span>
             </li>
-            <li>Ver Consumo</li>
+            <li>Ver Pago</li>
           </ul><!--.breadcrumb-->
 
           @stop
 
 @section('contenido')
 <div class="page-header position-relative">
-      <h1>Consumo</h1>
+      <h1>Pagar Cuenta</h1>
   </div>
 
 
@@ -46,14 +46,14 @@
        <?php
   // si existe el usuario carga los datos
     if ($consumo->exists):
-        $form_data = array('url' => 'consumo/update/'.$consumo->id);
+        $form_data = array('url' => 'consumo/pagar/'.$consumo->id);
         $action    = 'Editar';
         $cliente_id = $consumo->cliente_id;  
         $mes = $consumo->mes;
         $ano = $consumo->ano;
 
     else:
-        $form_data = array('url' => 'consumo/insert/');
+        $form_data = array('url' => 'consumo/pagar/');
         $action    = 'Crear';      
 
          
@@ -69,6 +69,8 @@
              $cliente = Cliente::find($cliente_id); 
              echo "<h4 class='blue'> ".$cliente->nombres. " ". $cliente->apellidop." ".$cliente->apellidom."</h4>";
              ?>
+
+
 
          
 
@@ -100,11 +102,122 @@ $lecturaanterior = 0;
             ?>
 
 
-            @foreach($cliente->consumo()->where("ano","=", $anoanterior)->where("mes","=",$mesanterior)->get() as $lecturaanterior)
-<?php 
-$lecturaanterior = $lecturaanterior->lectura;
+
+@foreach($cliente->consumo()->where("ano","=", $anoanterior)->where("mes","=",$mesanterior)->get() as $lecturaanterior)
+
+
+<?php
+   $consumito = Consumo::find($lecturaanterior->id);
+  echo $lecturamespasado = $consumito->lectura;
+  $estadomespasado = $consumito->estado;
+
 ?>
 @endforeach
+
+
+    <!--  LECTURA MES ACTUAL  -->
+@foreach($cliente->consumo()->where("ano","=", $ano)->where("mes","=",$mes)->get() as $lecturaactual2)
+<?php 
+ $lecturaactual2;
+$consumito2 = Consumo::find($lecturaactual2->id);
+$consumoid = $consumito2->id; 
+
+
+ echo $lecturamesactual = $consumito2->lectura;
+  $estadomesactual = $consumito2->estado;
+ ?>
+
+@endforeach
+
+
+   <?php 
+
+$consumoactual = $lecturamesactual - $lecturamespasado;
+
+
+?>
+
+
+<?php
+$totaltramos =0;
+$terminar = "";
+
+
+?>
+
+<!--  CALCULAR TOTAL CON TARIFAS -->
+    @foreach ($cliente->tarifa->tarifadetalle()->get() as $valor)
+<?php 
+
+if($consumoactual>0)
+{
+    if(($consumoactual >= $valor->tramoa) && ($consumoactual <= $valor->tramob))
+    {
+     $totaltramos += ($consumoactual - ($valor->tramob-10))*$valor->valor;
+    // break;
+     $terminar = "termina";
+
+    }
+    else if($terminar != "termina")
+    {
+     $totaltramos += 10*$valor->valor;
+    }
+
+
+    
+}
+?>
+  
+      @endforeach
+
+
+
+
+  <!--  CALCULAR COBROS EXTRAS  -->
+ 
+
+
+    @foreach ($cliente->cobroextra as $cobrosextras)
+ <?php 
+
+ $totaltramos += $cobrosextras->valor;  
+ //echo $cobrosextras->valor;
+
+ ?>
+    @endforeach
+
+
+
+
+<!--  SUMAR CARGO FIJO  -->
+    <?php
+    $totaltramos += $cliente->tarifa->cargofijo;
+    ?>
+
+     {{ $totaltramos }}
+
+
+
+
+
+
+
+
+
+             {{Form::label("Valor")}}
+
+
+
+      <h4 class='blue'>{{$totaltramos}}</h4>
+    {{Form::hidden('valor', $totaltramos )}}
+
+
+
+
+
+
+
+
 
 
 			{{ Form::label("Tipo de pago")}}
@@ -137,6 +250,7 @@ $lecturaanterior = $lecturaanterior->lectura;
 
  $(document).ready(function() {
 
+  $('[data-rel=tooltip]').tooltip();
 
 $( "#consumoactive" ).addClass( "active" );
 

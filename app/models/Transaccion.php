@@ -5,6 +5,10 @@ class Transaccion extends Eloquent { //Todos los modelos deben extender la clase
    protected $fillable = array('producto_id','tipotransaccion','cantidad','valor'); // los campos de la tabla
 
 
+   public function producto(){
+    return $this->belongsTo("Producto");
+   }
+
 
     public $errors;
     

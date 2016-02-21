@@ -4,8 +4,14 @@ class Cliente extends Eloquent { //Todos los modelos deben extender la clase Elo
    
    protected $fillable = array('tarifa_id','nombres','apellidop','apellidom','rut','origen','nmedidor','direccion','telefono','orden'); // los campos de la tabla
 
+//rotected $connection = 'consumoDB';
+
    public function consumo(){
     return $this->hasMany("Consumo");
+   }
+
+   public function cobroextra(){
+    return $this->hasMany("Cobroextra");
    }
 
    public function tarifa()

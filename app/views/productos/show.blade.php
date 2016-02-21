@@ -58,7 +58,7 @@
           <tr>
           
             <th>Nombre</th>
-            <th>Stock</th>
+           <th>Stock</th> 
             <th>Acciones</th>
             
           </tr>
@@ -67,8 +67,9 @@
   @foreach($productos as $producto)
            <tr>
 <td>{{ $producto->nombre}}</td>
+<td>{{ $producto->transaccion->sum("cantidad") }}</td>
 
-<td>{{ $producto->stock}}</td>
+
 
 
 
@@ -97,7 +98,7 @@
 
  $(document).ready(function() {
 
-$( "#productoactive" ).addClass( "active" );
+$( "#bodegaactive" ).addClass( "active" );
 
 var table = $('#example').DataTable( {
         iDisplayLength: -1,

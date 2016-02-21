@@ -52,7 +52,7 @@
             <th>Tramo A</th>
             <th>Tramo B</th>
             <th>Valor</th>
-            
+            <th>SobreConsumo</th>
            <th>Acciones</th>
             
           </tr>
@@ -77,6 +77,11 @@
 
            <td>
     {{ $tarifadetalles->valor}}
+      
+  </td>
+
+    <td>
+    {{ $tarifadetalles->sobreconsumo}}
       
   </td>
   
@@ -114,6 +119,7 @@ $( "#tarifadetalleactive" ).addClass( "active" );
 
 
 var table = $('#example').DataTable( {
+  iDisplayLength: -1,
         dom: 'T<"clear">lfrtip',
         tableTools: {
             "sSwfPath": "js/TableTools/swf/copy_csv_xls_pdf.swf"
@@ -129,7 +135,7 @@ var tr = $(this).parents('tr');
             if(result) {
              // bootbox.alert("You are sure!");
              tr.fadeOut(1000);
-             $.get("{{ url('eliminar')}}",
+             $.get("{{ url('tarifadetalle/eliminar')}}",
               { id: id },
     
       function(data) {

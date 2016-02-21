@@ -6,13 +6,28 @@ class ConsumotabletController extends BaseController {
      */
     public function show()
     {
-        $consumos = Consumo::all();
-        $clientes = Cliente::all();
         
+        $mes = date("n");
+        $ano = date("Y");
+
+       // $clientes = Cliente::join("consumo","consumo.cliente_id","=","cliente.id")->where("consumo.mes","=",$mes)->where("consumo.ano","=",$ano)->whereNotIn("consumo.lectura")->paginate(1);
+        $clientes = Cliente::whereNotExists(function($query)
+            {
+                $mes = date("n");
+                $ano = date("Y");
+                $query->select(DB::raw(1))
+                      ->from('consumo')
+                      ->whereRaw('consumo.cliente_id = cliente.id')
+                      ->whereRaw('consumo.mes ='.$mes)
+                      ->whereRaw('consumo.ano ='.$ano);
+                      
+            })
+            ->paginate(1);
+            //->get();
         // Con el método all() le estamos pidiendo al modelo de Usuario
         // que busque todos los registros contenidos en esa tabla y los devuelva en un Array
         
-        return View::make('consumotablet.show')->with("consumo",$consumos)->with("clientes",$clientes);
+        return View::make('consumotablet.show')->with("clientes",$clientes);
         
         // El método make de la clase View indica cual vista vamos a mostrar al usuario
         //y también pasa como parámetro los datos que queramos pasar a la vista.
@@ -21,121 +36,37 @@ class ConsumotabletController extends BaseController {
 
 
 
-    public function insert0()
-    {
-       // return View::make('consumo.formulario0');
-
-$consumo = new Consumo; 
-        $clientes = Cliente::all();
-        //enviamos un usuario vacio para que cargue el formulario insert
-
-        
-        return View::make('consumotablet.formulario0')->with("consumo",$consumo)->with("clientes",$clientes);
-
-    }
 
 
-     public function insert()
-    {
-        $consumo = new Consumo; 
-        $clientes = Cliente::lists("rut","id");
-        //enviamos un usuario vacio para que cargue el formulario insert
-
-        
-        return View::make('consumotablet.formulario')->with("consumo",$consumo)->with("clientes",$clientes);
-    }
- 
- 
-    /**
-     * Crear el usuario nuevo
-     */
-    public function insert2()
+    public function insert2() //post
     {
 
-
+        $datos = Input::all();
         $consumo = new Consumo;
+       // print_r($data);
 
-
-        $datos = Input::all(); 
-
-      
-       
         if ($consumo->isValid($datos,""))
         {
-             list($dia,$mes,$ano) = explode("/",$datos['fecha']);
-            $datos['fecha'] = "$ano-$mes-$dia";
-           
+        
+
+             $primerconsumo = Consumo::where("cliente_id","=",$datos["cliente_id"])->count();
 
             $consumo->fill($datos);
+            
+            if($primerconsumo == 0) // si es el primer consumo, la boleta kedara pagada
+            {
+                $consumo->estado = "pagado";
+            }
             
             $consumo->save();
 
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
-            return Redirect::to('consumo')->with("success","Datos ingresados correctamente");
+
+
+            return Redirect::to('consumoTablet')->with("success","Datos ingresados correctamente");
             
         }
-        else
-        {
-            // En caso de error regresa a la acción create con los datos y los errores encontrados
-return Redirect::to('consumo/insert')->withInput()->withErrors($consumo->errors);
-            //return "mal2";
-        }
-     //   return Redirect::to('usuarios');
-    // el método redirect nos devuelve a la ruta de mostrar la lista de los usuarios
-
-    }
- 
-     /**
-     * Ver usuario con id
-     */
-
-    public function update($id) //get
-    {
-        //echo $id;
-      
-            $consumo =  Consumo::find($id);
-            $clientes = Cliente::lists("rut","id");
-           
-   
-        return View::make('consumo.formulario')->with("consumo", $consumo)->with("clientes",$clientes);
-
-                
- 
-      
-    }
-
-
-    public function update2($id) //post
-    {
         
-         $cliente = Cliente::find($id);
-
-
-        $datos = Input::all(); 
-        
-        if ($cliente->isValid($datos, $id))
-        {
-            // Si la data es valida se la asignamos al usuario
-            $cliente->fill($datos);
-            // Guardamos el usuario
-             //$usuario->password = Hash::make($usuario->password);
-
-      
-            
-           $cliente->save();
-
-            // Y Devolvemos una redirección a la acción show para mostrar el usuario
-             return Redirect::to('consumo')->with("success","Datos ingresados correctamente");
-            
-        }
-        else
-        {
-            // En caso de error regresa a la acción create con los datos y los errores encontrados
-return Redirect::to('consumo/insert')->withInput()->withErrors($cliente->errors);
-            //return "mal2";
-        }
-
-        return Redirect::to('consumo');
       
     }
 

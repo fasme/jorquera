@@ -33,7 +33,7 @@
         <h1>
  Clientes
 <a class="btn  btn-success" href={{ url("cliente/insert")}}>
-  <i class="fa fa-plus-circle fa-2x pull-left"></i> Añadir</a> 
+   Añadir</a> 
 
 </h1>
  </div><!--/.page-header-->

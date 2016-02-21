@@ -56,17 +56,19 @@
 <table id="example" class="table table-striped table-bordered table-hover">
   <thead>
           <tr>
-          
+          <th>Producto</th>
             <th>Tipo de Transaccion</th>
             <th>Cantidad</th>
 			<th>Valor</th>
-            
+            <th>Acciones</th>
             
           </tr>
         </thead>
         <tbody>
   @foreach($transaccion as $transaccion)
            <tr>
+
+            <td>{{$transaccion->producto->nombre}}</td>
 <td>{{ $transaccion->tipotransaccion}}</td>
 
 <td>{{ $transaccion->cantidad}}</td>
@@ -79,13 +81,11 @@
                         
 
 
-                          <a class="green" href= {{ 'transaccion/update/'.$transaccion->producto_id }}>
+                          <a class="green" href= {{ 'transaccion/update/'.$transaccion->id }}>
                             <i class="fa fa-pencil bigger-130"></i>
                           </a>
 
-                          <a class="red bootbox-confirm" data-id={{ $transaccion->producto_id }}>
-                            <i class="fa fa-trash bigger-130"></i>
-                          </a>
+                       
                        
      
                       </td>
@@ -100,7 +100,7 @@
 
  $(document).ready(function() {
 
-$( "#transaccionactive" ).addClass( "active" );
+$( "#bodegaactive" ).addClass( "active" );
 
 var table = $('#example').DataTable( {
         iDisplayLength: -1,
@@ -120,7 +120,7 @@ var tr = $(this).parents('tr');
             if(result) {
              // bootbox.alert("You are sure!");
              tr.fadeOut(1000);
-             $.get("{{ url('eliminar')}}",
+             $.get("{{ url('transaccion/eliminar')}}",
               { id: id },
     
       function(data) {

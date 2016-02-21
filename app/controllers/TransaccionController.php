@@ -23,9 +23,9 @@ class TransaccionController extends BaseController {
     {
         $transaccion = new Transaccion; 
         //enviamos un usuario vacio para que cargue el formulario insert
+        $productos = Producto::all()->lists("nombre","id");
 
-        $tarifas = Tarifa::all()->lists("producto_id","tipotransaccion","cantidad","valor");
-        return View::make('transacciones.formulario')->with("transaccion",$transaccion)->with("tarifas",$tarifas);
+        return View::make('transacciones.formulario')->with("transaccion",$transaccion)->with("productos",$productos);
     }
  
  
@@ -42,12 +42,19 @@ class TransaccionController extends BaseController {
         if ($transaccion->isValid($datos))
         {
             // Si la data es valida se la asignamos al usuario
+
+            if($datos["tipotransaccion"] == 'salida')
+            {
+                $datos["cantidad"] = $datos["cantidad"] * -1; 
+            }
+
+
             $transaccion->fill($datos);
             // Guardamos el usuario
             /* $usuario->password = Hash::make($usuario->password);*/
 
       
-            
+
            $transaccion->save();
 
             // Y Devolvemos una redirección a la acción show para mostrar el usuario
@@ -75,8 +82,9 @@ return Redirect::to('transaccion/insert')->withInput()->withErrors($transaccion-
       
  
            $transaccion = Transaccion::find($id);
+            $productos = Producto::all()->lists("nombre","id");
    
-        return View::make('transacciones.formulario')->with("transaccion", $transaccion);
+        return View::make('transacciones.formulario')->with("transaccion", $transaccion)->with("productos",$productos);
  
                 
  
@@ -95,6 +103,12 @@ return Redirect::to('transaccion/insert')->withInput()->withErrors($transaccion-
         if ($transaccion->isValid($datos))
         {
             // Si la data es valida se la asignamos al usuario
+
+             if($datos["tipotransaccion"] == 'salida')
+            {
+                $datos["cantidad"] = $datos["cantidad"] * -1; 
+            }
+            
             $transaccion->fill($datos);
             // Guardamos el usuario
              //$usuario->password = Hash::make($usuario->password);

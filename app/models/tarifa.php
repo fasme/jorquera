@@ -10,6 +10,11 @@ public function cliente(){
     return $this->hasMany ("Cliente");
    }
 
+public function tarifadetalle(){
+    return $this->hasMany ("Tarifadetalle");
+   }
+
+
     public $errors;
     
     public function isValid($data) // funcion que valida los datos
